@@ -1,0 +1,10 @@
+body{
+    text-align: center;
+}
+
+#game {
+    position: absolute;
+    background-image: url('./assets/doodlejumpbg.png');
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
