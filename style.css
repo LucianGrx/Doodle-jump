@@ -13,7 +13,7 @@ body{
 .instructions{
     position: absolute;
     top: 30%;
-    right: 30%;
+    right: 20%;
     transform: translate(50%, -50%);
     width: 300px;
 }
