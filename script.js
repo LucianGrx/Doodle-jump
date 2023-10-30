@@ -24,6 +24,7 @@ let doodler = {
 //platforms
 
 let platformsArray = [];
+let platformsRedArray = [];
 let platformWidth = 60;
 let platformHeight = 18;
 let platformImg;
@@ -74,7 +75,9 @@ window.onload = function () {
 
   velocityY = initialVelocityY;
 
+
   placePlatforms();
+  placeRedPlatforms();
   requestAnimationFrame(update);
   if (gameOver) {
     return;
@@ -126,10 +129,28 @@ function update() {
     );
   }
 
+  for (let j = 0; j < platformsRedArray.length; j++) {
+    let platform = platformsRedArray[j];
+    if (velocityY < 0 && doodler.y < (gameHeight * 3) / 4) {
+      platform.y -= initialVelocityY; //slide platform down
+    }
+    context.drawImage(
+      platform.img,
+      platform.x,
+      platform.y,
+      platform.width,
+      platform.height
+    );
+  }
+
   // remove platforms and add new platforms
   while (platformsArray.length > 0 && platformsArray[0].y > gameHeight) {
     platformsArray.shift(); // remove first elem from the array
     newPaltformGenerate();
+  }
+  while (platformsRedArray.length > 0 && platformsRedArray[0].y > gameHeight) {
+    platformsRedArray.shift(); // remove first elem from the array
+    newRedPaltformGenerate();
   }
 
   //score
@@ -145,6 +166,7 @@ function update() {
       gameWidth / 7,
       (gameHeight * 7) / 8
     );
+    updateScoreDisplay(); 
   }
 }
 
@@ -171,12 +193,44 @@ function moveDoodler(e) {
       maxScore = 0;
       gameOver = false;
       placePlatforms();
+      placeRedPlatforms();
+
+      saveScore();
+      updateScoreDisplay();
       
   }
 }
 
+function placeRedPlatforms() {
+  platformsRedArray = [];
+
+  let platform = {
+    img: platformImgRed,
+    x: gameWidth / 2,
+    y: gameHeight - 50,
+    width: platformWidth,
+    height: platformHeight,
+  };
+
+  platformsRedArray.push(platform);
+
+  for (let i = 0; i < 1; i++) {
+    let randomX = Math.floor((Math.random() * gameWidth * 3) / 4);
+    let platform = {
+      img: platformImgRed,
+      x: randomX,
+      y: gameHeight - 75 * i - 150,
+      width: platformWidth,
+      height: platformHeight,
+    };
+    platformsRedArray.push(platform);
+  }
+}
+
+
 function placePlatforms() {
   platformsArray = [];
+
 
   let platform = {
     img: platformImg,
@@ -213,6 +267,18 @@ function newPaltformGenerate() {
   platformsArray.push(platform);
 }
 
+function newRedPaltformGenerate() {
+  let randomX = Math.floor((Math.random() * gameWidth * 3) / 4);
+  let platform = {
+    img: platformImgRed,
+    x: randomX,
+    y: -platformHeight,
+    width: platformWidth,
+    height: platformHeight,
+  };
+  platformsRedArray.push(platform);
+}
+
 function detectCollision(a, b) {
   return (
     a.x < b.x + b.width && // a top left corner doesn't reach b top right corner
@@ -225,7 +291,6 @@ function detectCollision(a, b) {
 function updateScore() {
   let points = Math.floor(50 * Math.random());
   if (velocityY < 0) {
-    //negative going up
     maxScore += points;
     if (score < maxScore) {
       score = maxScore;
@@ -233,4 +298,18 @@ function updateScore() {
   } else if (velocityY >= 0) {
     maxScore -= points;
   }
+  saveScore();
+}
+
+function saveScore() {
+  if (gameOver) {
+    localStorage.setItem('score', score);
+  }
+}
+
+function updateScoreDisplay() {
+  const scoreDisplay = document.getElementById("score-display");
+  let lastScore = localStorage.getItem('score', score)
+  
+  scoreDisplay.textContent = "Score: " + lastScore;
 }

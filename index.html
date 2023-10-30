@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Biolan Lucian - Doodle Jump Game</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <h1>Doodle Jump</h1>
     <canvas id="game"></canvas>
+    <div class="instructions">
+      <h2>Instructions:</h2>
+      <div class="instructions__container">
+        <div class="key__1">
+          <div class="A__key">
+            <img src="./assets/a-key.png" alt="a-keyboard" />
+            <span>Press <b>A</b> for Left</span>
+          </div>
+          <div class="D__key">
+            <img src="./assets/d-key.png" alt="d-keyboard" />
+            <span>Press <b>D</b> for Left</span>
+          </div>
+        </div>
+        <div class="key__2">
+          <div class="Left__key">
+            <img src="./assets/left-key.png" alt="left-keyboard" />
+            <span>Press <b>Left Arrow</b> for Left</span>
+          </div>
+          <div class="Right__key">
+            <img src="./assets/right-key.png" alt="right-keyboard" />
+            <span>Press <b>Right Arrow</b> for Right</span>
+          </div>
+        </div>
+      </div>
+      <div id="score-display">Scor: 0</div>
+    </div>
+
+    <footer>
+      &copy; 2023 Biolan Lucian. Toate drepturile rezervate.
+    </footer>
 
     <script src="./script.js"></script>
-</body>
+  </body>
+  
 </html>

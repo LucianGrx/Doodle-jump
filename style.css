@@ -1,5 +1,6 @@
 body{
     text-align: center;
+    background-image: url("./assets/bg-image.jpg");
 }
 
 #game {
@@ -8,3 +9,47 @@ body{
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+.instructions{
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    transform: translate(50%, -50%);
+    width: 300px;
+}
+
+.instructions__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    
+}
+
+.key__1, .key__2{
+    display: flex;
+    gap: 2rem;
+}
+
+.A__key, .D__key, .Left__key, .Right__key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+span{
+    font-size: 1.2rem;
+}
+
+#score-display{
+    margin-top: 3rem;
+    font-size: 2rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+  }
